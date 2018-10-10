@@ -24,5 +24,6 @@ hs_err_pid*
 
 *.project
 *.settings
+*.classpath
 
 target/
