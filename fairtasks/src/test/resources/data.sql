@@ -1,0 +1,1 @@
+insert into users(EMAIL, USER_NAME) values('test@test.com','test');

@@ -1,0 +1,29 @@
+CREATE TABLE USERS
+(
+    EMAIL varchar(100),
+    USER_NAME varchar(100) NOT NULL,
+    PRIMARY KEY (EMAIL)
+);
+
+CREATE TABLE GROUPS
+(
+    EMAIL varchar(100),
+    GROUP_NAME varchar(100),
+    PRIMARY KEY (EMAIL, GROUP_NAME)
+);
+
+CREATE TABLE TASKS
+(
+    TASK varchar(100),
+    GROUP_NAME varchar(100),
+    VALUE int(11) NOT NULL,
+    DESCRIPTION varchar(255),
+    PRIMARY KEY (TASK, GROUP_NAME)
+);
+
+CREATE TABLE TASKS_HISTORY
+(
+    TASK varchar(100),
+    GROUP_NAME varchar(100),
+	DATE DATETIME
+);
