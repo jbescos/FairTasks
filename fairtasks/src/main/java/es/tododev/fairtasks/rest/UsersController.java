@@ -29,7 +29,7 @@ public class UsersController {
 		this.usersService = usersService;
 	}
 
-	@GetMapping("/{email}")
+	@GetMapping(value="/{email}", produces="application/json")
     public User get(@PathVariable @Email String email) {
         return usersService.findByEmail(email);
     }

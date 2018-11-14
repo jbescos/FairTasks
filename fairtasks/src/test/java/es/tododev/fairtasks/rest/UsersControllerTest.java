@@ -36,10 +36,7 @@ public class UsersControllerTest {
 	
 	@Test
 	public void findUser() throws Exception {
-		mockMvc.perform(get("/users/{email}", new Object[] {"boy@test.com"}))
-		.andExpect(status().isOk())
-		.andExpect(jsonPath("$.email", equalTo("boy@test.com")))
-		.andExpect(jsonPath("$.userName", equalTo("boy")));
+		mockMvc.perform(get("/users/{email}", new Object[] {"boy@test.com"})).andExpect(status().isOk()).andExpect(jsonPath("$.email", equalTo("boy@test.com"))).andExpect(jsonPath("$.userName", equalTo("boy")));
 	}
 	
 	@Test
