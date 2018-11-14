@@ -42,6 +42,16 @@ public class UsersRepository {
 		jdbcTemplate.update("INSERT INTO USERS (EMAIL, USER_NAME) VALUES (?, ?)", new Object[] {user.getEmail(), user.getUserName()});
 	}
 	
+	@Transactional
+	public void update(String email, User user) {
+		jdbcTemplate.update("UPDATE USERS SET USER_NAME = ? WHERE EMAIL = ?", new Object[] {user.getUserName(), email});
+	}
+	
+	@Transactional
+	public void delete(String email) {
+		jdbcTemplate.update("DELETE FOM USERS WHERE EMAIL = ?", new Object[] {email});
+	}
+	
 	private static class UserMapper implements RowMapper<User> {
 		@Override
 		public User mapRow(ResultSet arg0, int arg1) throws SQLException {

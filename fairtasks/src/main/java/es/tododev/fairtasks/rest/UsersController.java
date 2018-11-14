@@ -34,21 +34,23 @@ public class UsersController {
         return usersService.findByEmail(email);
     }
 	
-	@PostMapping(headers = {"Content-type=application/json"})
+	@PostMapping(consumes="application/json", produces="application/json")
 	@ResponseBody
 	public ResponseEntity<String> insert(@RequestBody @Valid User user){
 		usersService.insert(user);
 		return ResponseEntity.ok(user.getEmail());
 	}
 	
-	@DeleteMapping("/{email}")
+	@DeleteMapping(value="/{email}", consumes="application/json", produces="application/json")
 	public ResponseEntity<String> delete(@PathVariable @Email String email) {
-		throw new UnsupportedOperationException("Method not implemented");
+		usersService.delete(email);
+		return ResponseEntity.ok(email);
 	}
 	
-	@PutMapping("/{email}")
+	@PutMapping(value="/{email}", consumes="application/json", produces="application/json")
 	public ResponseEntity<User> update(@PathVariable @Email String email, @RequestBody @Valid User user) {
-		throw new UnsupportedOperationException("Method not implemented");
+		usersService.update(email, user);
+		return ResponseEntity.ok(user);
 	}
 	
 }

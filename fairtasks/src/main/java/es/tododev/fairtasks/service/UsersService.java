@@ -24,4 +24,12 @@ public class UsersService {
 		usersRepository.insert(user);
 	}
 	
+	public void delete(String email) {
+		usersRepository.delete(email);
+	}
+	
+	public void update(String email, User user) {
+		usersRepository.update(email, user);
+	}
+	
 }
