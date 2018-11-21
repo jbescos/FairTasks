@@ -7,7 +7,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -27,12 +31,18 @@ import es.tododev.fairtasks.dto.User;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-@WithMockUser
+@WithMockUser(username = "user", roles = "USER")
 public class UsersControllerTest {
 
 	
-	@Autowired
 	private MockMvc mockMvc;
+	@Autowired
+	private WebApplicationContext webApplicationContext;
+	
+	@Before()
+	public void setup(){
+	    mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();  
+	}
 	
 	@Test
 	public void findUser() throws Exception {
@@ -45,8 +55,8 @@ public class UsersControllerTest {
 		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString(user);
 		mockMvc.perform(post("/users").content(json).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
-		mockMvc.perform(put("/users/{email}", new Object[] {user.getEmail()}).content(json)).andExpect(status().isOk());
-		mockMvc.perform(delete("/users/{email}", new Object[] {user.getEmail()}).content(json)).andExpect(status().isOk());
+		mockMvc.perform(put("/users/{email}", new Object[] {user.getEmail()}).content(json).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
+		mockMvc.perform(delete("/users/{email}", new Object[] {user.getEmail()}).content(json).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
 	}
 	
 }

@@ -49,7 +49,7 @@ public class UsersRepository {
 	
 	@Transactional
 	public void delete(String email) {
-		jdbcTemplate.update("DELETE FOM USERS WHERE EMAIL = ?", new Object[] {email});
+		jdbcTemplate.update("DELETE FROM USERS WHERE EMAIL = ?", new Object[] {email});
 	}
 	
 	private static class UserMapper implements RowMapper<User> {
