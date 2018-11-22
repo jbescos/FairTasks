@@ -8,6 +8,14 @@ public class Group {
 	private String group;
 	private String email;
 
+	public Group() {
+	}
+
+	public Group(@NotNull String group, String email) {
+		this.group = group;
+		this.email = email;
+	}
+
 	public String getGroup() {
 		return group;
 	}
