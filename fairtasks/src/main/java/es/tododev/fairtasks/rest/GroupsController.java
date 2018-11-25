@@ -43,6 +43,14 @@ public class GroupsController {
 		return ResponseEntity.ok(groups);
     }
 	
+	@GetMapping(produces="application/json")
+	@RequestMapping("/unique")
+    public ResponseEntity<List<Group>> getUnique(@AuthenticationPrincipal User user) {
+		List<Group> groups = groupService.findUnique(user.getUsername());
+		log.debug("User {}, Groups {}", user.getUsername(), groups);
+		return ResponseEntity.ok(groups);
+    }
+	
 	@PostMapping(consumes="application/json", produces="application/json")
 	@ResponseBody
 	public ResponseEntity<Group> insert(@AuthenticationPrincipal User user, @RequestBody @Valid Group group){

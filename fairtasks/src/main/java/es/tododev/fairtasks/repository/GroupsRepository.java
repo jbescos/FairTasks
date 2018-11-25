@@ -33,6 +33,10 @@ public class GroupsRepository {
         return jdbcTemplate.query("SELECT * FROM GROUPS WHERE GROUP_NAME IN (SELECT GROUP_NAME FROM GROUPS WHERE EMAIL = ?) ORDER BY GROUP_NAME", new Object[]{email}, new GroupMapper());
     }
     
+    public List<Group> findUnique(String email) {
+        return jdbcTemplate.query("SELECT * FROM GROUPS WHERE EMAIL = ? ORDER BY GROUP_NAME", new Object[]{email}, new GroupMapper());
+    }
+    
     public List<Group> findByEmailGroup(String email, String group) {
         return jdbcTemplate.query("SELECT * FROM GROUPS WHERE EMAIL = ? AND GROUP_NAME = ?", new Object[]{email, group}, new GroupMapper());
     }

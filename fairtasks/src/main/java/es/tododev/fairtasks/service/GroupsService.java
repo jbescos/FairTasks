@@ -24,9 +24,16 @@ public class GroupsService {
 		return groupsRepository.findByEmail(email);
 	}
 	
+	@Transactional(readOnly=true)
+	public List<Group> findUnique(String email) {
+		return groupsRepository.findUnique(email);
+	}
+	
 	@Transactional
 	public void insert(Group group, String email) {
-		groupsRepository.insert(group);
+		if(group.getEmail() != null) {
+			groupsRepository.insert(group);
+		}
 		List<Group> existing = groupsRepository.findByEmailGroup(email, group.getGroup());
 		if(existing.isEmpty()) {
 			group.setEmail(email);
