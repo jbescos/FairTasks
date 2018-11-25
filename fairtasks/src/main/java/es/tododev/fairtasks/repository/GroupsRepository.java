@@ -30,7 +30,7 @@ public class GroupsRepository {
     }
 	
     public List<Group> findByEmail(String email) {
-        return jdbcTemplate.query("SELECT * FROM GROUPS WHERE EMAIL = ? ORDER BY GROUP_NAME", new Object[]{email}, new GroupMapper());
+        return jdbcTemplate.query("SELECT * FROM GROUPS WHERE GROUP_NAME IN (SELECT GROUP_NAME FROM GROUPS WHERE EMAIL = ?) ORDER BY GROUP_NAME", new Object[]{email}, new GroupMapper());
     }
     
     public List<Group> findByEmailGroup(String email, String group) {

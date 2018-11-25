@@ -12,7 +12,7 @@ function loadCrudTable(id, path, remove){
 				row.append(removeCol);
 			});
 			if(remove === true){
-				var removeCol = $('<div></div>').attr('class', 'col alert alert-danger').text('Delete');
+				var removeCol = $('<button></button>').attr('class', 'col btn btn-danger').text('Delete');
 				row.append(removeCol);
 			}
 			$("#"+id).append(row);
