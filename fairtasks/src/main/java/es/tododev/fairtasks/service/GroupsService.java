@@ -25,8 +25,13 @@ public class GroupsService {
 	}
 	
 	@Transactional
-	public void insert(Group group) {
+	public void insert(Group group, String email) {
 		groupsRepository.insert(group);
+		List<Group> existing = groupsRepository.findByEmailGroup(email, group.getGroup());
+		if(existing.isEmpty()) {
+			group.setEmail(email);
+			groupsRepository.insert(group);
+		}
 	}
 	
 	@Transactional

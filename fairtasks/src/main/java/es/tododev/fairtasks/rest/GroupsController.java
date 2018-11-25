@@ -41,8 +41,7 @@ public class GroupsController {
 	@PostMapping(consumes="application/json", produces="application/json")
 	@ResponseBody
 	public ResponseEntity<Group> insert(@AuthenticationPrincipal User user, @RequestBody @Valid Group group){
-		group.setEmail(user.getUsername());
-		groupService.insert(group);
+		groupService.insert(group, user.getUsername());
 		return ResponseEntity.ok(group);
 	}
 	

@@ -22,11 +22,15 @@ public class GroupsRepository {
 	}
 	
     public List<Group> findAll() {
-        return jdbcTemplate.query("SELECT * FROM GROUPS", new GroupMapper());
+        return jdbcTemplate.query("SELECT * FROM GROUPS ORDER BY GROUP_NAME", new GroupMapper());
     }
 	
     public List<Group> findByEmail(String email) {
-        return jdbcTemplate.query("SELECT * FROM GROUPS WHERE EMAIL = ?", new Object[]{email}, new GroupMapper());
+        return jdbcTemplate.query("SELECT * FROM GROUPS WHERE EMAIL = ? ORDER BY GROUP_NAME", new Object[]{email}, new GroupMapper());
+    }
+    
+    public List<Group> findByEmailGroup(String email, String group) {
+        return jdbcTemplate.query("SELECT * FROM GROUPS WHERE EMAIL = ? AND GROUP_NAME = ?", new Object[]{email, group}, new GroupMapper());
     }
 
 	public void insert(Group group) {
