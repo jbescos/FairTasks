@@ -3,10 +3,9 @@ package es.tododev.fairtasks.rest;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.Arrays;
 
@@ -25,7 +24,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import es.tododev.fairtasks.dto.Group;
+import es.tododev.fairtasks.dto.Task;
  
 
 
@@ -33,7 +32,7 @@ import es.tododev.fairtasks.dto.Group;
 @SpringBootTest
 @AutoConfigureMockMvc
 @WithMockUser(username = "email@email.com", roles = "USER")
-public class GroupsControllerTest {
+public class TasksControllerTest {
 
 	
 	private MockMvc mockMvc;
@@ -47,14 +46,14 @@ public class GroupsControllerTest {
 	
 	@Test
 	public void insertGetModifyDelete() throws Exception {
-		Group group = new Group("group1", "email@email.com");
+		Task task = new Task("test task", "test group", 100, "description");
 		ObjectMapper mapper = new ObjectMapper();
-		String groupJson = mapper.writeValueAsString(group);
-		String groupsJson = mapper.writeValueAsString(Arrays.asList(group));
-		mockMvc.perform(post("/groups").content(groupJson).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
-		mockMvc.perform(get("/groups", new Object[] {group.getGroup()}).accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk()).andExpect(content().json(groupsJson));
-		mockMvc.perform(delete("/groups/{groupName}", new Object[] {group.getGroup()}).content(groupJson).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
-		mockMvc.perform(get("/groups", new Object[] {group.getGroup()}).accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk()).andExpect(content().json(mapper.writeValueAsString(Arrays.asList())));
+		String taskJson = mapper.writeValueAsString(task);
+		String tasksJson = mapper.writeValueAsString(Arrays.asList(task));
+		mockMvc.perform(post("/tasks").content(taskJson).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
+		mockMvc.perform(get("/tasks/{groupName}", new Object[] {task.getGroup()}).accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk()).andExpect(content().json(tasksJson));
+		mockMvc.perform(delete("/tasks/{groupName}/{task}", new Object[] {task.getGroup(), task.getTask()}).content(tasksJson).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
+		mockMvc.perform(get("/tasks/{groupName}", new Object[] {task.getGroup()}).accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk()).andExpect(content().json(mapper.writeValueAsString(Arrays.asList())));
 	}
 	
 }

@@ -30,8 +30,4 @@ public class GroupsService {
 		groupsRepository.delete(group);
 	}
 	
-	public void update(String groupName, Group group) {
-		groupsRepository.update(groupName, group);
-	}
-	
 }

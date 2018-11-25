@@ -28,8 +28,4 @@ public class UsersService {
 		usersRepository.delete(email);
 	}
 	
-	public void update(String email, User user) {
-		usersRepository.update(email, user);
-	}
-	
 }

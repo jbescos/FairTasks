@@ -43,13 +43,10 @@ public class UsersRepository {
 	}
 	
 	@Transactional
-	public void update(String email, User user) {
-		jdbcTemplate.update("UPDATE USERS SET USER_NAME = ? WHERE EMAIL = ?", new Object[] {user.getUserName(), email});
-	}
-	
-	@Transactional
 	public void delete(String email) {
 		jdbcTemplate.update("DELETE FROM USERS WHERE EMAIL = ?", new Object[] {email});
+		jdbcTemplate.update("DELETE FROM GROUPS WHERE EMAIL = ?", new Object[] {email});
+		jdbcTemplate.update("DELETE FROM TASKS_HISTORY WHERE EMAIL = ?", new Object[] {email});
 	}
 	
 	private static class UserMapper implements RowMapper<User> {

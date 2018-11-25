@@ -55,7 +55,6 @@ public class UsersControllerTest {
 		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString(user);
 		mockMvc.perform(post("/users").content(json).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
-		mockMvc.perform(put("/users/{email}", new Object[] {user.getEmail()}).content(json).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
 		mockMvc.perform(delete("/users/{email}", new Object[] {user.getEmail()}).content(json).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
 	}
 	

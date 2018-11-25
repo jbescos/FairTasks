@@ -47,10 +47,4 @@ public class UsersController {
 		return ResponseEntity.ok(email);
 	}
 	
-	@PutMapping(value="/{email}", consumes="application/json", produces="application/json")
-	public ResponseEntity<User> update(@PathVariable @Email String email, @RequestBody @Valid User user) {
-		usersService.update(email, user);
-		return ResponseEntity.ok(user);
-	}
-	
 }

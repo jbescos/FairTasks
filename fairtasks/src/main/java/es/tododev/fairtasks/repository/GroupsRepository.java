@@ -37,13 +37,10 @@ public class GroupsRepository {
 	}
 	
 	@Transactional
-	public void update(String email, Group group) {
-		jdbcTemplate.update("UPDATE GROUPS SET GROUP_NAME = ? WHERE EMAIL = ?", new Object[] {group.getGroup(), email});
-	}
-	
-	@Transactional
 	public void delete(String group) {
 		jdbcTemplate.update("DELETE FROM GROUPS WHERE GROUP_NAME = ?", new Object[] {group});
+		jdbcTemplate.update("DELETE FROM TASKS WHERE GROUP_NAME = ?", new Object[] {group});
+		jdbcTemplate.update("DELETE FROM TASKS_HISTORY WHERE GROUP_NAME = ?", new Object[] {group});
 	}
 	
 	private static class GroupMapper implements RowMapper<Group> {
