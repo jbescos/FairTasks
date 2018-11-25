@@ -47,13 +47,13 @@ public class GroupsController {
 		return ResponseEntity.ok(group);
 	}
 	
-	@DeleteMapping(value="/{group}", consumes="application/json", produces="application/json")
-	public ResponseEntity<String> delete(@PathVariable @NotNull String group) {
-		groupService.delete(group);
-		return ResponseEntity.ok(group);
+	@DeleteMapping(value="/{groupName}", consumes="application/json", produces="application/json")
+	public ResponseEntity<String> delete(@PathVariable @NotNull String groupName) {
+		groupService.delete(groupName);
+		return ResponseEntity.ok(groupName);
 	}
 	
-	@PutMapping(value="/{group}", consumes="application/json", produces="application/json")
+	@PutMapping(value="/{groupName}", consumes="application/json", produces="application/json")
 	public ResponseEntity<Group> update(@PathVariable @NotNull String groupName, @AuthenticationPrincipal User user, @RequestBody @Valid Group group) {
 		group.setEmail(user.getUsername());
 		groupService.update(groupName, group);
