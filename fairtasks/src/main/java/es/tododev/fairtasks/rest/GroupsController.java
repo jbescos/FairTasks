@@ -37,10 +37,10 @@ public class GroupsController {
 	}
 
 	@GetMapping(produces="application/json")
-    public List<Group> get(@AuthenticationPrincipal User user) {
+    public ResponseEntity<List<Group>> get(@AuthenticationPrincipal User user) {
 		List<Group> groups = groupService.findByUserName(user.getUsername());
 		log.debug("User {}, Groups {}", user.getUsername(), groups);
-		return groups;
+		return ResponseEntity.ok(groups);
     }
 	
 	@PostMapping(consumes="application/json", produces="application/json")

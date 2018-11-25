@@ -31,8 +31,8 @@ public class TasksController {
 	}
 
 	@GetMapping(value="/{groupName}", produces="application/json")
-    public List<Task> get(@PathVariable @NotNull String groupName) {
-        return tasksService.findByGroup(groupName);
+    public ResponseEntity<List<Task>> get(@PathVariable @NotNull String groupName) {
+        return ResponseEntity.ok(tasksService.findByGroup(groupName));
     }
 	
 	@PostMapping(consumes="application/json", produces="application/json")

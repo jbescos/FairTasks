@@ -33,13 +33,13 @@ public class TasksHistoryController {
 	}
 
 	@GetMapping(value="/user/{groupName}", produces="application/json")
-    public List<TaskHistory> get(@AuthenticationPrincipal User user, @PathVariable @NotNull String groupName) {
-        return tasksHistoryService.findByEmailGroup(user.getUsername(), groupName);
+    public ResponseEntity<List<TaskHistory>> get(@AuthenticationPrincipal User user, @PathVariable @NotNull String groupName) {
+        return ResponseEntity.ok(tasksHistoryService.findByEmailGroup(user.getUsername(), groupName));
     }
 	
 	@GetMapping(value="/{groupName}", produces="application/json")
-    public List<TaskHistory> get(@PathVariable @NotNull String groupName) {
-        return tasksHistoryService.findByGroup(groupName);
+    public ResponseEntity<List<TaskHistory>> get(@PathVariable @NotNull String groupName) {
+        return ResponseEntity.ok(tasksHistoryService.findByGroup(groupName));
     }
 	
 	@PostMapping(consumes="application/json", produces="application/json")

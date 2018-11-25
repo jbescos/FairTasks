@@ -30,8 +30,8 @@ public class UsersController {
 	}
 
 	@GetMapping(value="/{email}", produces="application/json")
-    public User get(@PathVariable @Email String email) {
-        return usersService.findByEmail(email);
+    public ResponseEntity<User> get(@PathVariable @Email String email) {
+        return ResponseEntity.ok(usersService.findByEmail(email));
     }
 	
 	@PostMapping(consumes="application/json", produces="application/json")
