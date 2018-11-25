@@ -8,11 +8,11 @@ function loadCrudTable(id, path, remove){
 		data.forEach(function(item) {
 			var row = $('<div></div>').attr('class', 'row');
 			$.each(item, function(k, v) {
-				var removeCol = $('<div></div>').attr('class', 'col').text(v);
+				var removeCol = $('<div></div>').attr('class', 'col p-3 mb-2 bg-secondary text-white').text(v);
 				row.append(removeCol);
 			});
 			if(remove === true){
-				var removeCol = $('<div></div>').attr('class', 'col-2');
+				var removeCol = $('<div></div>').attr('class', 'col-2 p-3 mb-2 bg-secondary text-white');
 				var buttonCol = $('<button></button>').attr('class', 'col btn btn-danger').text('Delete');
 				removeCol.append(buttonCol);
 				row.append(removeCol);
