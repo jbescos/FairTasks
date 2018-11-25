@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -11,10 +13,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.tododev.fairtasks.dto.Group;
+import es.tododev.fairtasks.rest.GroupsController;
 @Repository
 public class GroupsRepository {
 
 	private final JdbcTemplate jdbcTemplate;
+	private final Logger log = LoggerFactory.getLogger(GroupsRepository.class);
 
 	@Autowired
 	public GroupsRepository(JdbcTemplate jdbcTemplate) {
@@ -34,6 +38,7 @@ public class GroupsRepository {
     }
 
 	public void insert(Group group) {
+		log.debug("Insert {}", group);
 		jdbcTemplate.update("INSERT INTO GROUPS (EMAIL, GROUP_NAME) VALUES (?, ?)", new Object[] {group.getEmail(), group.getGroup()});
 	}
 	
