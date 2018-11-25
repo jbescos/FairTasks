@@ -6,6 +6,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -26,6 +28,7 @@ import es.tododev.fairtasks.service.GroupsService;
 @RequestMapping("/groups")
 public class GroupsController {
 	
+	private final static Logger log = LogManager.getLogger();
 	private final GroupsService groupService;
 	
 	@Autowired
@@ -35,7 +38,9 @@ public class GroupsController {
 
 	@GetMapping(produces="application/json")
     public List<Group> get(@AuthenticationPrincipal User user) {
-        return groupService.findByUserName(user.getUsername());
+		List<Group> groups = groupService.findByUserName(user.getUsername());
+		log.debug("Groups {}", groups);
+		return groups;
     }
 	
 	@PostMapping(consumes="application/json", produces="application/json")
