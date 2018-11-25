@@ -21,22 +21,18 @@ public class GroupsRepository {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 	
-	@Transactional(readOnly=true)
     public List<Group> findAll() {
         return jdbcTemplate.query("SELECT * FROM GROUPS", new GroupMapper());
     }
 	
-	@Transactional(readOnly=true)
     public List<Group> findByEmail(String email) {
         return jdbcTemplate.query("SELECT * FROM GROUPS WHERE EMAIL = ?", new Object[]{email}, new GroupMapper());
     }
 
-	@Transactional
 	public void insert(Group group) {
 		jdbcTemplate.update("INSERT INTO GROUPS (EMAIL, GROUP_NAME) VALUES (?, ?)", new Object[] {group.getEmail(), group.getGroup()});
 	}
 	
-	@Transactional
 	public void delete(String group) {
 		jdbcTemplate.update("DELETE FROM GROUPS WHERE GROUP_NAME = ?", new Object[] {group});
 		jdbcTemplate.update("DELETE FROM TASKS WHERE GROUP_NAME = ?", new Object[] {group});

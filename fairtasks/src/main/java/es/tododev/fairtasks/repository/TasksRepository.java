@@ -22,17 +22,14 @@ public class TasksRepository {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 	
-	@Transactional(readOnly=true)
     public List<Task> findByGroup(String groupName) {
         return jdbcTemplate.query("SELECT * FROM TASKS WHERE GROUP_NAME = ?", new Object[]{groupName}, new TaskMapper());
     }
 
-	@Transactional
 	public void insert(Task task) {
 		jdbcTemplate.update("INSERT INTO TASKS (TASK, GROUP_NAME, VALUE, DESCRIPTION) VALUES (?, ?, ?, ?)", new Object[] {task.getTask(), task.getGroup(), task.getValue(), task.getDescription()});
 	}
 	
-	@Transactional
 	public void delete(String task, String groupName) {
 		jdbcTemplate.update("DELETE FROM TASKS WHERE TASK = ?", new Object[] {task});
 		jdbcTemplate.update("DELETE FROM TASKS_HISTORY WHERE TASK = ? AND GROUP_NAME = ?", new Object[] {task, groupName});

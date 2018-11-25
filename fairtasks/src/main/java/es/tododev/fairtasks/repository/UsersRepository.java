@@ -22,27 +22,22 @@ public class UsersRepository {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 	
-	@Transactional(readOnly=true)
     public List<User> findAll() {
         return jdbcTemplate.query("SELECT * FROM USERS", new UserMapper());
     }
 	
-	@Transactional(readOnly=true)
     public User findByEmail(String email) {
         return jdbcTemplate.queryForObject("SELECT * FROM USERS WHERE EMAIL = ?", new Object[]{email}, new UserMapper());
     }
 	
-	@Transactional(readOnly=true)
     public List<User> findByGroup(String group) {
         return jdbcTemplate.query("SELECT USERS.* FROM USERS INNER JOIN GROUPS ON GROUP = ?", new Object[]{group}, new UserMapper());
     }
 	
-	@Transactional
 	public void insert(User user) {
 		jdbcTemplate.update("INSERT INTO USERS (EMAIL, USER_NAME) VALUES (?, ?)", new Object[] {user.getEmail(), user.getUserName()});
 	}
 	
-	@Transactional
 	public void delete(String email) {
 		jdbcTemplate.update("DELETE FROM USERS WHERE EMAIL = ?", new Object[] {email});
 		jdbcTemplate.update("DELETE FROM GROUPS WHERE EMAIL = ?", new Object[] {email});

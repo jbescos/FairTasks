@@ -20,17 +20,13 @@ public class TasksHistoryRepository {
 	public TasksHistoryRepository(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
-	
-	@Transactional(readOnly=true)
     public List<TaskHistory> findByEmailGroup(String email, String groupName) {
         return jdbcTemplate.query("SELECT * FROM TASKS_HISTORY WHERE EMAIL = ? AND GROUP_NAME = ? ORDER BY DATE DESC", new Object[]{email, groupName}, new TaskHistoryMapper());
     }
-	@Transactional(readOnly=true)
     public List<TaskHistory> findByGroup(String groupName) {
         return jdbcTemplate.query("SELECT * FROM TASKS_HISTORY WHERE GROUP_NAME = ? ORDER BY DATE DESC", new Object[]{groupName}, new TaskHistoryMapper());
     }
 
-	@Transactional
 	public void insert(TaskHistory taskHistory) {
 		jdbcTemplate.update("INSERT INTO TASKS_HISTORY (TASK, GROUP_NAME, EMAIL, DATE) VALUES (?, ?, ?, ?)", new Object[] {taskHistory.getTask(), taskHistory.getGroup(), taskHistory.getEmail(), taskHistory.getDate()});
 	}

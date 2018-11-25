@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import es.tododev.fairtasks.dto.Task;
 import es.tododev.fairtasks.dto.TaskHistory;
@@ -22,14 +23,17 @@ public class TasksHistoryService {
 		this.tasksHistoryRepository = tasksHistoryRepository;
 	}
 	
+	@Transactional(readOnly=true)
 	public List<TaskHistory> findByGroup(String groupName) {
 		return tasksHistoryRepository.findByGroup(groupName);
 	}
 	
+	@Transactional(readOnly=true)
 	public List<TaskHistory> findByEmailGroup(String email, String groupName) {
 		return tasksHistoryRepository.findByEmailGroup(email, groupName);
 	}
 	
+	@Transactional
 	public void insert(TaskHistory tasksHistory) {
 		tasksHistoryRepository.insert(tasksHistory);
 	}
