@@ -26,6 +26,7 @@
 		<maria.version>2.3.0</maria.version>
 		<oauth2.version>2.3.4.RELEASE</oauth2.version>
 		<jwt.version>1.0.9.RELEASE</jwt.version>
+		<jaxb.version>2.2.11</jaxb.version>
 	</properties>
 
 	<dependencies>
@@ -78,7 +79,17 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-<!-- 			<version>${slf4j-version}</version> -->
+			<!-- <version>${slf4j-version}</version> -->
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>${jaxb.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-core</artifactId>
+			<version>${jaxb.version}</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -90,7 +101,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.7.0</version>
+<!-- 				<version>3.7.0</version> -->
 				<inherited>true</inherited>
 				<configuration>
 					<source>${maven.compiler.source}</source>
