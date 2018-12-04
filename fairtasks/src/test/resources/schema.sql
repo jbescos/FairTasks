@@ -1,7 +1,7 @@
 CREATE TABLE USERS
 (
     EMAIL varchar(100),
-    USER_NAME varchar(100) NOT NULL,
+    PASSWORD varchar(512) NOT NULL,
     PRIMARY KEY (EMAIL)
 );
 

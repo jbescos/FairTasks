@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	// https://www.devglan.com/spring-security/spring-boot-oauth2-jwt-example
 	
-	@Resource(name = "userService")
+	@Resource(name = "usersService")
 	private UserDetailsService userDetailsService;
 
 	@Override

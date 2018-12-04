@@ -6,34 +6,32 @@ import javax.validation.constraints.NotNull;
 public class User {
 
 	@NotNull
-	private String userName;
+	private String password;
 	@Email
 	private String email;
 	
-	public User(String userName, String email) {
-		this.userName = userName;
+	public User(String email, String password) {
 		this.email = email;
+		this.password = password;
 	}
 	
 	public User() {
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getPassword() {
+		return password;
 	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public String getEmail() {
 		return email;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	@Override
-	public String toString() {
-		return "User [userName=" + userName + ", email=" + email + "]";
 	}
 
 	@Override
@@ -41,7 +39,7 @@ public class User {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		return result;
 	}
 
@@ -59,13 +57,17 @@ public class User {
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
-		if (userName == null) {
-			if (other.userName != null)
+		if (password == null) {
+			if (other.password != null)
 				return false;
-		} else if (!userName.equals(other.userName))
+		} else if (!password.equals(other.password))
 			return false;
 		return true;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "User [password=" + password + ", email=" + email + "]";
+	}
 	
 }

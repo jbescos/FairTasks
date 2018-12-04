@@ -1,5 +1,5 @@
-insert into USERS(EMAIL, USER_NAME) values('boy@test.com','boy');
-insert into USERS(EMAIL, USER_NAME) values('girl@test.com','girl');
+insert into USERS(EMAIL, PASSWORD) values('boy@test.com','boy');
+insert into USERS(EMAIL, PASSWORD) values('girl@test.com','girl');
 
 insert into GROUPS(EMAIL, GROUP_NAME) values('test@test.com','home');
 

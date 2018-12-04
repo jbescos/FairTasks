@@ -35,7 +35,7 @@ public class UsersRepository {
     }
 	
 	public void insert(User user) {
-		jdbcTemplate.update("INSERT INTO USERS (EMAIL, USER_NAME) VALUES (?, ?)", new Object[] {user.getEmail(), user.getUserName()});
+		jdbcTemplate.update("INSERT INTO USERS (EMAIL, PASSWORD) VALUES (?, ?)", new Object[] {user.getEmail(), user.getPassword()});
 	}
 	
 	public void delete(String email) {
@@ -47,7 +47,7 @@ public class UsersRepository {
 	private static class UserMapper implements RowMapper<User> {
 		@Override
 		public User mapRow(ResultSet arg0, int arg1) throws SQLException {
-			return new User(arg0.getString("USER_NAME"), arg0.getString("EMAIL"));
+			return new User(arg0.getString("EMAIL"), arg0.getString("PASSWORD"));
 		}
 	}
 	

@@ -46,12 +46,12 @@ public class UsersControllerTest {
 	
 	@Test
 	public void findUser() throws Exception {
-		mockMvc.perform(get("/users/{email}", new Object[] {"boy@test.com"})).andExpect(status().isOk()).andExpect(jsonPath("$.email", equalTo("boy@test.com"))).andExpect(jsonPath("$.userName", equalTo("boy")));
+		mockMvc.perform(get("/users/{email}", new Object[] {"boy@test.com"})).andExpect(status().isOk()).andExpect(jsonPath("$.email", equalTo("boy@test.com"))).andExpect(jsonPath("$.password", equalTo("boy")));
 	}
 	
 	@Test
 	public void insertGetModifyDelete() throws Exception {
-		User user = new User("userName", "email@email.com");
+		User user = new User("email@email.com", "password");
 		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString(user);
 		mockMvc.perform(post("/users").content(json).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
