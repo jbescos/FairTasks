@@ -51,7 +51,7 @@ public class UsersControllerTest {
 	
 	@Test
 	public void insertGetModifyDelete() throws Exception {
-		User user = new User("email@email.com", "password");
+		User user = new User("email@email.com", "aaZZa44@");
 		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString(user);
 		mockMvc.perform(post("/users").content(json).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());

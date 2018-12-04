@@ -2,10 +2,19 @@ package es.tododev.fairtasks.dto;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 public class User {
 
+
+
+//    At least 8 chars
+//    Contains at least one digit
+//    Contains at least one lower alpha char and one upper alpha char
+//    Contains at least one char within a set of special chars (@#%$^ etc.)
+//    Does not contain space, tab, etc.
 	@NotNull
+	@Pattern(regexp="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")
 	private String password;
 	@Email
 	private String email;
